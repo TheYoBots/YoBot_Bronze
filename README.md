@@ -1,10 +1,13 @@
 # YoBot Bronze
 
-My attempt at creating a UCI Chess Engine in python using [python-chess](https://github.com/niklasf/python-chess).
+My attempt at creating a [UCI](http://wbec-ridderkerk.nl/html/UCIProtocol.html) Chess Engine in python using [python-chess](https://github.com/niklasf/python-chess).
 
-## Current State of Engine
+---
+**Current State of Engine**
 
 Currently only generating random moves using [python-chess 1.5.0](https://pypi.org/project/chess/).
+
+---
 
 ## Acknowledgements
 
