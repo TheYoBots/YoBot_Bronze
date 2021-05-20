@@ -1,3 +1,12 @@
+# This file is part of YoBot_Bronze UCI Chess Engine.
+# Copyright (C) 2021- Yohaan Seth Nathan (TheYoBots)
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the MIT License.
+#
+# You should have received a copy of the MIT License along with this 
+# UCI Chess Engine. If not, view this https://opensource.org/licenses/MIT
+
 import logging
 import chess
 import core

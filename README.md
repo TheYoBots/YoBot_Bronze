@@ -5,7 +5,7 @@ My attempt at creating a [UCI](http://wbec-ridderkerk.nl/html/UCIProtocol.html) 
 ---
 **Current State of Engine**
 
-Currently only generating random moves using [python-chess 1.5.0](https://pypi.org/project/chess/).
+Currently only generating random moves using [python-chess 1.5.0](https://pypi.org/project/chess/) and detects a mate in one.
 
 ---
 
