@@ -69,7 +69,7 @@ def getCheckMateMove(board: chess.Board) -> chess.Move:
 
         board.push(candidate_move)
         if board.is_checkmate():
-            logging.info(f"{candidate_move} is the best move")
+            logging.info(f"{candidate_move} is my best move")
             return candidate_move
         else:
             board.pop()
