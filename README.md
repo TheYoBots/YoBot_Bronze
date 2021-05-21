@@ -1,17 +1,19 @@
 # YoBot Bronze
 
-My attempt at creating a [UCI](http://wbec-ridderkerk.nl/html/UCIProtocol.html) Chess Engine in python using [python-chess](https://github.com/niklasf/python-chess).
+A simple [UCI](http://wbec-ridderkerk.nl/html/UCIProtocol.html) Chess Engine written in python using [python-chess](https://github.com/niklasf/python-chess).
 
 ---
 **Current State of Engine**
 
-Currently only captures the piece with the highest value and detects a mate in one. Otherwise it simply generating random moves using [python-chess 1.5.0](https://pypi.org/project/chess/).
+Currently only captures the piece with the highest value and detects a mate in one. Otherwise it simply generates random moves using [python-chess 1.5.0](https://pypi.org/project/chess/).
 
 ---
 
 ## Acknowledgements
 
 - [Niklas Feikas](https://github.com/niklasf) for creating [python-chess](https://github.com/niklasf/python-chess).
+- [UCI Documentation](http://wbec-ridderkerk.nl/html/UCIProtocol.html).
+- [Chessprogramming wiki](https://www.chessprogramming.org/Main_Page).
 
 ## License
 
