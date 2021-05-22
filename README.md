@@ -1,5 +1,7 @@
 # YoBot Bronze
 
+[![Python Build](https://github.com/TheYoBots/YoBot_Bronze/actions/workflows/python-build.yml/badge.svg)](https://github.com/TheYoBots/YoBot_Bronze/actions/workflows/python-build.yml)
+
 A simple [UCI](http://wbec-ridderkerk.nl/html/UCIProtocol.html) Chess Engine written in python using [python-chess](https://github.com/niklasf/python-chess).
 
 ---
