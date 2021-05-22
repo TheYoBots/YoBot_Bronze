@@ -10,35 +10,44 @@
 import logging
 import chess
 import random
+import sys
 
 logger = logging.getLogger(__name__)
 
 def getBestMove(board: chess.Board) -> chess.Move:
 
-    checkMateMove = getCheckMateMove(board)
+    myColor = board.turn
+    globalMaxScore = -sys.maxsize
+    bestMoves = []
 
-    if checkMateMove != None:
-        return checkMateMove
+    for myCandidateMove in list(board.legal_moves):
 
-    opponent_color = not board.turn
+        board.push(myCandidateMove)
 
-    opponent_initial_score = getBoardScore(board, opponent_color)
-    min_opponent_score = opponent_initial_score
+        if board.is_checkmate():
+            return myCandidateMove
 
-    best_move = None
+        candidateMinScore = sys.maxsize
 
-    for candidate_move in list(board.legal_moves):
-        board.push(candidate_move)
-        candidate_move_score = getBoardScore(board, opponent_color)
-        if candidate_move_score < min_opponent_score and candidate_move_score < opponent_initial_score:
-            min_opponent_score = candidate_move_score
-            best_move = candidate_move
+        for opponentCandidateMove in list(board.legal_moves):
+
+            board.push(opponentCandidateMove)
+            currentScore = getBoardTotalScore(board, myColor)
+
+            if currentScore < candidateMinScore:
+                candidateMinScore = currentScore
+
+            board.pop()
+
+        if candidateMinScore > globalMaxScore:
+            globalMaxScore = candidateMinScore
+            bestMoves = [myCandidateMove]
+        elif candidateMinScore == globalMaxScore:
+            bestMoves.append(myCandidateMove)
+
         board.pop()
 
-    if best_move == None:
-        return random.choice(list(board.legal_moves))
-    else:
-        return best_move
+    return random.choice(bestMoves)
 
 def getBoardScore(board: chess.Board, color: chess.Color) -> int:
 
@@ -63,16 +72,8 @@ def getBoardScore(board: chess.Board, color: chess.Color) -> int:
 
     return total
 
-def getCheckMateMove(board: chess.Board) -> chess.Move:
+def getBoardTotalScore(board: chess.Board, color: chess.Color) -> int:
 
-    for candidate_move in list(board.legal_moves):
-
-        board.push(candidate_move)
-        if board.is_checkmate():
-            logging.info(f"{candidate_move} is my best move")
-            return candidate_move
-        else:
-            board.pop()
-
-
-    return None
+    colorScore = getBoardScore(board, color)
+    oppositeColorScore = getBoardScore(board, not color)
+    return colorScore - oppositeColorScore
