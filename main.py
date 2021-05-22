@@ -14,53 +14,53 @@ import sys
 
 logger = logging.getLogger(__name__)
 
-def getBestMove(board: chess.Board) -> chess.Move:
+def get_best_move(board: chess.Board) -> chess.Move:
 
-    myColor = board.turn
-    globalMaxScore = -sys.maxsize
+    my_color = board.turn
+    global_max_score = -sys.maxsize
     bestMoves = []
 
-    for myCandidateMove in list(board.legal_moves):
+    for my_candidate_move in list(board.legal_moves):
 
-        board.push(myCandidateMove)
+        board.push(my_candidate_move)
 
         if board.is_checkmate():
-            return myCandidateMove
+            return my_candidate_move
 
-        candidateMinScore = sys.maxsize
+        candidate_min_score = sys.maxsize
 
-        for opponentCandidateMove in list(board.legal_moves):
+        for opponent_candidate_move in list(board.legal_moves):
 
-            board.push(opponentCandidateMove)
-            currentScore = getBoardTotalScore(board, myColor)
+            board.push(opponent_candidate_move)
+            currentScore = __get_board_total_score(board, my_color)
 
-            if currentScore < candidateMinScore:
-                candidateMinScore = currentScore
+            if currentScore < candidate_min_score:
+                candidate_min_score = currentScore
 
             board.pop()
 
-        if candidateMinScore > globalMaxScore:
-            globalMaxScore = candidateMinScore
-            bestMoves = [myCandidateMove]
-        elif candidateMinScore == globalMaxScore:
-            bestMoves.append(myCandidateMove)
+        if candidate_min_score > global_max_score:
+            global_max_score = candidate_min_score
+            bestMoves = [my_candidate_move]
+        elif candidate_min_score == global_max_score:
+            bestMoves.append(my_candidate_move)
 
         board.pop()
 
     return random.choice(bestMoves)
 
-def getBoardScore(board: chess.Board, color: chess.Color) -> int:
+def get_board_score(board: chess.Board, color: chess.Color) -> int:
 
     total = 0
 
-    pawns =  board.pieces(chess.PAWN, color)
+    pawns = board.pieces(chess.PAWN, color)
     bishops = board.pieces(chess.BISHOP, color)
     knights = board.pieces(chess.KNIGHT, color)
     queens = board.pieces(chess.QUEEN, color)
     rooks = board.pieces(chess.ROOK, color)
 
     for pawn in pawns:
-        total = total + 1 
+        total = total + 1
     for bishop in bishops:
         total = total + 3
     for knight in knights:
@@ -72,8 +72,8 @@ def getBoardScore(board: chess.Board, color: chess.Color) -> int:
 
     return total
 
-def getBoardTotalScore(board: chess.Board, color: chess.Color) -> int:
+def __get_board_total_score(board: chess.Board, color: chess.Color) -> int:
 
-    colorScore = getBoardScore(board, color)
-    oppositeColorScore = getBoardScore(board, not color)
-    return colorScore - oppositeColorScore
+    color_score = get_board_score(board, color)
+    opposite_color_score = get_board_score(board, not color)
+    return color_score - opposite_color_score
