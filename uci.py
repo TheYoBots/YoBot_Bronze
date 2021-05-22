@@ -73,7 +73,7 @@ def command_received(msg: str):
         return
 
     elif msg[0:2] == "go":
-        _move = core.get_best_move(board) 
+        _move = main.get_best_move(board) 
         send_response(f"bestmove {_move}")
         return
 
