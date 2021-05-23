@@ -18,7 +18,7 @@ def get_best_move(board: chess.Board) -> chess.Move:
 
     my_color = board.turn
     global_max_score = -sys.maxsize
-    bestMoves = []
+    best_moves = []
 
     for my_candidate_move in list(board.legal_moves):
 
@@ -32,22 +32,32 @@ def get_best_move(board: chess.Board) -> chess.Move:
         for opponent_candidate_move in list(board.legal_moves):
 
             board.push(opponent_candidate_move)
-            currentScore = __get_board_total_score(board, my_color)
 
-            if currentScore < candidate_min_score:
-                candidate_min_score = currentScore
+            if board.is_checkmate():
+                current_score = -9999
+            else:
+                current_score = __get_board_total_score(board, my_color)
+
+            if current_score < candidate_min_score:
+                candidate_min_score = current_score
 
             board.pop()
 
         if candidate_min_score > global_max_score:
             global_max_score = candidate_min_score
-            bestMoves = [my_candidate_move]
+            best_moves = [my_candidate_move]
         elif candidate_min_score == global_max_score:
-            bestMoves.append(my_candidate_move)
+            best_moves.append(my_candidate_move)
 
         board.pop()
 
-    return random.choice(bestMoves)
+    best_move = random.choice(best_moves)
+
+    # Always promote to queen.
+    if best_move.uci()[-1].isalpha():
+        best_move.promotion = chess.QUEEN
+
+    return best_move
 
 def get_board_score(board: chess.Board, color: chess.Color) -> int:
 
