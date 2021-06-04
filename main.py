@@ -20,6 +20,9 @@ def get_best_move(board: chess.Board) -> chess.Move:
     global_max_score = -sys.maxsize
     best_moves = []
 
+    #attacked_pieces = get_attacked_pieces(board, my_color)
+    #print(attacked_pieces)
+
     for my_candidate_move in list(board.legal_moves):
 
         board.push(my_candidate_move)
@@ -64,6 +67,23 @@ def get_best_move(board: chess.Board) -> chess.Move:
     return best_move
 
 
+def get_attacked_pieces(board: chess.Board, defending_color: chess.Color):
+
+    attacked_pieces = { }
+
+    for square, piece in board.piece_map().items():
+
+        if board.color_at(square) != defending_color:
+            continue
+
+        attacking_pieces = get_attacking_pieces(board, not defending_color, square)
+        if len(attacking_pieces) > 0:
+
+            defending_pieces = get_defending_pieces(board, defending_color, square)
+            attacked_pieces[square] = (piece.piece_type, attacking_pieces, defending_pieces)
+
+    return attacked_pieces
+
 def __is_attacked(board: chess.Board, square: chess.Square):
 
     return len(board.attacks(square)) > 1
@@ -82,6 +102,15 @@ def get_attacking_pieces(board: chess.Board, attacking_color: chess.Color, squar
 
     return piece_types
 
+def get_defending_pieces(board: chess.Board, defending_color: chess.Color, square: chess.Square) -> [chess.PieceType]:
+
+    cloned_board = board.copy()
+
+    defending_pieces = get_attacking_pieces(cloned_board, defending_color, square)
+
+    del cloned_board
+
+    return defending_pieces
 
 def get_board_score(board: chess.Board, color: chess.Color) -> int:
 
@@ -93,16 +122,16 @@ def get_board_score(board: chess.Board, color: chess.Color) -> int:
     queens = board.pieces(chess.QUEEN, color)
     rooks = board.pieces(chess.ROOK, color)
 
-    for pawn in pawns:
-        total = total + 10
-    for bishop in bishops:
-        total = total + 30
-    for knight in knights:
-        total = total + 30
-    for queen in queens:
-        total = total + 90
-    for rook in rooks:
-        total = total + 50
+    for _ in pawns:
+        total += 10
+    for _ in bishops:
+        total += 30
+    for _ in knights:
+        total += 30
+    for _ in queens:
+        total += 90
+    for _ in rooks:
+        total += 50
 
     return total
 

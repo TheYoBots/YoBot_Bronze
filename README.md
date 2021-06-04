@@ -4,13 +4,6 @@
 
 A simple [UCI](http://wbec-ridderkerk.nl/html/UCIProtocol.html) Chess Engine written in python using [python-chess](https://github.com/niklasf/python-chess).
 
----
-**Current State of Engine**
-
-Currently only captures the piece with the highest value, detects a mate in one and tries to select a decent move. It always promotes a pawn to a Queen and Tries to avoid mates in one in simple positions. Otherwise it simply generates random moves using [python-chess 1.5.0](https://pypi.org/project/chess/).
-
----
-
 ## Acknowledgements
 
 - [Niklas Feikas](https://github.com/niklasf) for creating [python-chess](https://github.com/niklasf/python-chess).
