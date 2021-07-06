@@ -20,8 +20,8 @@ def get_best_move(board: chess.Board) -> chess.Move:
     global_max_score = -sys.maxsize
     best_moves = []
 
-    #attacked_pieces = get_attacked_pieces(board, my_color)
-    #print(attacked_pieces)
+    # attacked_pieces = get_attacked_pieces(board, my_color)
+    # print(attacked_pieces)
 
     for my_candidate_move in list(board.legal_moves):
 
@@ -29,6 +29,9 @@ def get_best_move(board: chess.Board) -> chess.Move:
 
         if board.is_checkmate():
             return my_candidate_move
+
+        if board.is_stalemate():
+            current_score = -500
 
         is_my_candidate_move_attacked = __is_attacked(board, my_candidate_move.to_square)
 
@@ -132,6 +135,12 @@ def get_board_score(board: chess.Board, color: chess.Color) -> int:
         total += 90
     for _ in rooks:
         total += 50
+
+    if (board.has_kingside_castling_rights(color)):
+        total += 1
+
+    if (board.has_queenside_castling_rights(color)):
+        total += 1
 
     return total
 
