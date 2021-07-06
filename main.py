@@ -33,14 +33,14 @@ def get_best_move(board: chess.Board) -> chess.Move:
             return my_candidate_move
 
         if board.is_stalemate():
-            current_score = -500
+            bonus = +500
 
         if board.can_claim_threefold_repetition():
             current_score = __get_board_total_score(board, my_color)
             if current_score > 0:
-                bonus = -1
-            else:
                 bonus = +1
+            else:
+                bonus = -1
 
         is_my_candidate_move_attacked = __is_attacked(board, my_candidate_move.to_square)
 
