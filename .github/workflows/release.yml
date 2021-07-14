@@ -1,4 +1,4 @@
-name: Python Build
+name: YoBot Bronze
 
 on: [push, pull_request]
 
