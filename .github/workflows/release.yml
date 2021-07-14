@@ -7,16 +7,16 @@ jobs:
 
     runs-on: ubuntu-latest
 
-	steps:
-      - uses: actions/checkout@v2
+    steps:
+    - uses: actions/checkout@v2
 
-      - name: Install PyInstaller
-        run: sudo pip install PyInstaller
+    - name: Install PyInstaller
+      run: sudo pip install PyInstaller
 
-      - name: Run PyInstaller windows
-        run: pyinstaller --onefile YoBot_Bronze.py
+    - name: Run PyInstaller windows
+      run: pyinstaller --onefile YoBot_Bronze.py
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: YoBot Bronze
-          path: YoBot_Bronze*.exe
+    - uses: actions/upload-artifact@v2
+      with:
+        name: YoBot Bronze
+        path: YoBot_Bronze*.exe
