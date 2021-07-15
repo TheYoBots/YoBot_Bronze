@@ -14,7 +14,7 @@ jobs:
       run: pip install pyinstaller
       
     - name: PyInstaller Windows
-      run: pyinstaller --onefile 
+      run: pyinstaller --onefile YoBot_Bronze.py
 
     - uses: actions/upload-artifact@v2
       with:
