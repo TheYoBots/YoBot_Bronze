@@ -1,3 +1,4 @@
+
 name: YoBot Bronze
 
 on: [push, pull_request]
@@ -5,17 +6,17 @@ on: [push, pull_request]
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
 
     - name: PyInstaller Windows
-      run: JackMcKew/pyinstaller-action-windows@main
-	  with:
-	    path: .
+      uses: JackMcKew/pyinstaller-action-windows@main
+      with:
+        path: src
 
     - uses: actions/upload-artifact@v2
       with:
         name: YoBot Bronze
-        path: dist/*
+        path: src/dist/*
