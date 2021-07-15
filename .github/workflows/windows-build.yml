@@ -1,5 +1,4 @@
-
-name: YoBot Bronze
+name: YoBot Bronze (Windows)
 
 on: [push, pull_request]
 
