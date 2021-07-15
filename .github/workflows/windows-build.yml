@@ -13,9 +13,9 @@ jobs:
     - name: PyInstaller Windows
       uses: JackMcKew/pyinstaller-action-windows@main
       with:
-        path: src/YoBot_Bronze.py
+        path: YoBot_Bronze.py
 
     - uses: actions/upload-artifact@v2
       with:
         name: YoBot Bronze
-        path: src/dist/*
+        path: dist/*
