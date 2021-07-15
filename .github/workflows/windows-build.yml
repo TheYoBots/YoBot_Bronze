@@ -5,17 +5,18 @@ on: [push, pull_request]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
 
+    - name: Install PyInstaller
+      run: pip install pyinstaller
+      
     - name: PyInstaller Windows
-      uses: JackMcKew/pyinstaller-action-windows@main
-      with:
-        path: src
+      run: pyinstaller --onefile 
 
     - uses: actions/upload-artifact@v2
       with:
         name: YoBot Bronze
-        path: src/dist/*
+        path: dist/*
