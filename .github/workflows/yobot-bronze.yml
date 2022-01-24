@@ -1,0 +1,39 @@
+name: YoBot Bronze
+
+on: [push, pull_request]
+
+jobs:
+  windows:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install PyInstaller
+      run: pip install pyinstaller
+      
+    - name: PyInstaller Windows
+      run: pyinstaller --onefile YoBot_Bronze.py
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: YoBot Bronze (Windows)
+        path: dist/YoBot_Bronze.exe
+
+  linux:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - - uses: actions/checkout@v2
+
+    - name: Package Application
+      uses: JackMcKew/pyinstaller-action-linux@main
+      with:
+        path: .
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: YoBot Bronze (Linux)
+        path: dist/linux/*
