@@ -5,18 +5,18 @@ on: [push, pull_request]
 jobs:
   windows:
 
-    runs-on: windows-latest
+    runs-on: windows-2022
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Install PyInstaller
       run: pip install pyinstaller
       
     - name: PyInstaller Windows
-      run: pyinstaller --onefile YoBot_Bronze.py
+      run: pyinstaller -D -F -n YoBot_Bronze -w "YoBot_Bronze.py"
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: YoBot Bronze (Windows)
         path: dist/YoBot_Bronze.exe
@@ -26,14 +26,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - name: Package Application
-      uses: JackMcKew/pyinstaller-action-linux@main
-      with:
-        path: .
+    - name: Install PyInstaller
+      run: pip install pyinstaller
 
-    - uses: actions/upload-artifact@v2
+    - name: PyInstaller Linux
+      run: pyinstaller -D -F -n YoBot_Bronze -c "YoBot_Bronze.py"
+
+    - uses: actions/upload-artifact@v3
       with:
         name: YoBot Bronze (Linux)
-        path: dist/YoBot*
+        path: dist/YoBot_Bronze
